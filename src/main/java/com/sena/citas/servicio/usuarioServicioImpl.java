@@ -5,6 +5,7 @@ import com.sena.citas.repositorio.usuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,5 +20,14 @@ public class usuarioServicioImpl implements usuarioServicio{
     @Override
     public usuario guardarUsuario(usuario usuario) {
         return repositorio.save(usuario);
+    }
+
+    @Override
+    public List<usuario> listarEstilistas(int nivel) {
+        return repositorio.listarEstilistas(nivel);
+    }
+
+    private void show(List<usuario> usuarios){
+        usuarios.forEach(System.out::println);
     }
 }

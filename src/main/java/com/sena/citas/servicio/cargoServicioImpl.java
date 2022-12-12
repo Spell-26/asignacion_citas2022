@@ -21,4 +21,9 @@ public class cargoServicioImpl implements cargoServicio{
     public cargo guardarCargo(cargo cargo) {
         return repositorio.save(cargo);
     }
+
+    @Override
+    public cargo obtenerCargoPorId(int id) {
+        return repositorio.findById(id).get();
+    }
 }
