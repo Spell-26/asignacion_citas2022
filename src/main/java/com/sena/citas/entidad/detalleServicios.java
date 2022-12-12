@@ -1,10 +1,9 @@
 package com.sena.citas.entidad;
-
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.sql.Date;
+
 
 @Entity
 @Table(name = "detalle_servicios")
@@ -14,10 +13,15 @@ public class detalleServicios {
     @Column(name = "dservicio_id")
     private int id;
 
-    @Column(name = "fecha_hora")
-    private Date fecha;
+    @Column(name = "fecha")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
+    private String fecha;
 
-    @Column(name = "disponibilidad")
+    @Column(name = "hora")
+    private String hora;
+
+    @Column(name = "disponibilidad", columnDefinition = "boolean default false")
     private boolean disponibilidad;
 
     @ManyToOne
@@ -28,23 +32,45 @@ public class detalleServicios {
     @JoinColumn(name = "servicio_id")
     private serviciosPrestados servicioPrestado;
 
+    @OneToOne(mappedBy = "detalleS")
+    private cita cita;
+
     public detalleServicios(){
 
     }
-    public detalleServicios(int id, usuario  usuario, serviciosPrestados servicio, Date fecha, boolean disponibilidad){
+    public detalleServicios(int id, usuario  usuario, serviciosPrestados servicio, String fecha, boolean disponibilidad, String hora){
         this.id = id;
         this.usuario = usuario;
         this.servicioPrestado = servicio;
         this.fecha = fecha;
         this.disponibilidad = disponibilidad;
+        this.hora = hora;
     }
-    public detalleServicios(usuario  usuario, serviciosPrestados servicio, Date fecha, boolean disponibilidad){
+    public detalleServicios(usuario  usuario, serviciosPrestados servicio, String fecha, boolean disponibilidad, String hora){
         this.usuario = usuario;
         this.servicioPrestado = servicio;
         this.fecha = fecha;
         this.disponibilidad = disponibilidad;
+        this.hora = hora;
     }
     //getters and setters
+
+
+    public com.sena.citas.entidad.cita getCita() {
+        return cita;
+    }
+
+    public void setCita(com.sena.citas.entidad.cita cita) {
+        this.cita = cita;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
 
     public int getId() {
         return id;
@@ -70,11 +96,11 @@ public class detalleServicios {
         this.servicioPrestado = servicioPrestado;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
