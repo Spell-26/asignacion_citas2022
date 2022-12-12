@@ -19,6 +19,24 @@
       <div class="card-body">
         <form th:action="@{/servicios/asignados}" th:object="${asignarServicio}" method="POST">
           <div class="form-group">
+            <label>Asignar la fecha y la hora de la cita:</label>
+            <div class="form-group">
+              <input type="date" class="form-control" id="fecha" autocomplete="off" th:field="*{fecha}" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="horaCita">Hora de la cita:</label>
+            <input class="form-control" th:field="*{hora}" type="time" name="horaCita" placeholder="Ingrese la hora" id="horaCita">
+          </div>
+          <div class="form-group">
+            <label>Disponibilidad:</label>
+            <select class="form-select"  aria-label="Default select example" th:field="*{disponibilidad}">
+              <option selected disabled th:value="0">Selecciona la disponibilidad de la cita</option>
+              <option  th:value="true" th:text="Si">Si</option>
+              <option  th:value="false" th:text="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label>Estilista:</label>
             <select class="form-select"  aria-label="Default select example" th:field="*{usuario}">
               <option selected disabled th:value="0">Selecciona un estilista</option>
@@ -29,7 +47,7 @@
             <label>Servicio:</label>
             <select class="form-select"  aria-label="Default select example" th:field="*{servicioPrestado}">
               <option selected disabled th:value="0">Selecciona un servicio</option>
-              <option th:each=" servicio : ${servicios}" th:value="${servicio.id}" th:text="${servicio.descripcion}"></option>
+              <option th:each=" servicio : ${servicios}" th:value="${servicio.id}" th:text="${servicio.nombreServicio}"></option>
             </select>
           </div>
           <div class="box-footer">
@@ -41,6 +59,8 @@
   </div>
 
 </div>
+
+
 
 </body>
 </html>
