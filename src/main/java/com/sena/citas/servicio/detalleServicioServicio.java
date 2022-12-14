@@ -8,5 +8,15 @@ public interface detalleServicioServicio {
     public List<detalleServicios>listarTodosLosDetallesDeServicio();
     public detalleServicios guardarDetalleServicios(detalleServicios detalleServicios);
 
+    public List<detalleServicios> filtrarPorFecha(String fecha);
 
+    public int cambioDisponibilidad(boolean estado, int id);
+
+    void eliminardetalleServicioPorId(int id);
+
+    public List<detalleServicios> detallesVinculadosAEstilista(int id);
+
+    public List<detalleServicios> detallesVinculadosAServicioPrestado(int id);
+
+    public detalleServicios obtenerDetalleServicioPorId(int id);
 }

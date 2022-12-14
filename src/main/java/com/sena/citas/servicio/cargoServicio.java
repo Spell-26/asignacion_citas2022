@@ -8,4 +8,5 @@ public interface cargoServicio {
     public List<cargo> listarTodosLosCargos();
     public cargo guardarCargo(cargo cargo);
     public cargo obtenerCargoPorId(int id);
+    public void eliminarCargo(int id);
 }

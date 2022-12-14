@@ -1,5 +1,7 @@
 package com.sena.citas.entidad;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;

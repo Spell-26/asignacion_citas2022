@@ -1,6 +1,7 @@
 package com.sena.citas.controlador;
 
 import com.sena.citas.entidad.detalleServicios;
+import com.sena.citas.servicio.citaServicioImpl;
 import com.sena.citas.servicio.detalleServicioServicioImpl;
 import com.sena.citas.servicio.serviciosPrestadosServicioImpl;
 import com.sena.citas.servicio.usuarioServicioImpl;
@@ -9,10 +10,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.text.SimpleDateFormat;
@@ -28,7 +26,8 @@ public class detalleServiciosControlador {
     private usuarioServicioImpl usuarioServicio;
     @Autowired
     private serviciosPrestadosServicioImpl serviciosDisponibles;
-
+    @Autowired
+    private citaServicioImpl servicioCita;
 
     @GetMapping("/servicios/asignados")
     public String listarServiciosAsignados(Model modelo){
@@ -37,13 +36,8 @@ public class detalleServiciosControlador {
     }
     @PostMapping("/servicios/asignados")
     public String guardarDetalleServicio(@ModelAttribute("asignarServicio") detalleServicios detalleS){
-
         detalleServicio.guardarDetalleServicios(detalleS);
         return "redirect:/servicios/asignados";
-    }
-    @InitBinder
-    public void initBinder(WebDataBinder binder){
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("dd/MM/yyyy"), true, 10 ));
     }
     @GetMapping("/servicios/asignar")
     public String formularioNuevoDetalleServicio(Model modelo) {
@@ -69,5 +63,33 @@ public class detalleServiciosControlador {
 
         return "servicios/asignar-servicio";
     }
+    //eliminar detalle de servicio
+    @GetMapping("/servicios/asignados/{id}")
+    public String eliminarDetalleServicio(@PathVariable int id){
+        //eliminar cada cita vinculada a cada servicio
+        servicioCita.eliminarCitaPorDetalleId(id);
+        detalleServicio.eliminardetalleServicioPorId(id);
+        return"redirect:/servicios/asignados";
+    }
+    // editar detalle de servicio
+    @GetMapping("/servicios/editar_detalle/{id}")
+    public String mostrarFormularioEditarDetalleServicio(@PathVariable int id, Model modelo){
+        modelo.addAttribute("asignarServicio", detalleServicio.obtenerDetalleServicioPorId(id));
+        modelo.addAttribute("estilistas", usuarioServicio.listarEstilistas(2));
+        modelo.addAttribute("servicios", serviciosDisponibles.listarTodosLosServiciosPrestados());
 
+        return "servicios/editar-detalle-servicio";
+    }
+    @PostMapping("/servicios/asignados/{id}")
+    public String actualizarDetalleServicio(@PathVariable int id, @ModelAttribute("asignarServicio") detalleServicios asignarServicio){
+        detalleServicios detalleServicioExistente = detalleServicio.obtenerDetalleServicioPorId(id);
+        detalleServicioExistente.setId(id);
+        detalleServicioExistente.setDisponibilidad(asignarServicio.isDisponibilidad());
+        detalleServicioExistente.setFecha(asignarServicio.getFecha());
+        detalleServicioExistente.setHora(asignarServicio.getHora());
+        detalleServicioExistente.setUsuario(asignarServicio.getUsuario());
+        detalleServicioExistente.setServicioPrestado(asignarServicio.getServicioPrestado());
+
+        return "redirect:/servicios/asignados";
+    }
 }

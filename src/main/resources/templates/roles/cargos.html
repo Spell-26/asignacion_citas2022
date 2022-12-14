@@ -28,8 +28,8 @@
       <th scope="row" th:text="${cargo.id}">id</th>
       <td th:text="${cargo.descripcion}">Nombre</td>
       <td th:text="${cargo.nivel}">Apellido</td>
-      <td><a  class="btn btn-info">Editar</a></td>
-      <td><a class="btn btn-warning">Eliminar</a></td>
+      <td><a th:href="@{/roles/editar/{id}(id=${cargo.id})}" class="btn btn-info">Editar</a></td>
+      <td><a th:href="@{/roles/cargos/{id}(id=${cargo.id})}" class="btn btn-warning">Eliminar</a></td>
     </tr>
     </tbody>
   </table>

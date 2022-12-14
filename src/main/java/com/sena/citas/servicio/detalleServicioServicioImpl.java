@@ -22,4 +22,35 @@ public class detalleServicioServicioImpl implements detalleServicioServicio{
     public detalleServicios guardarDetalleServicios(detalleServicios detalleServicios) {
         return repositorio.save(detalleServicios);
     }
+
+    @Override
+    public List<detalleServicios> filtrarPorFecha(String fecha) {
+        return repositorio.filtrarServicioPorFecha(fecha);
+    }
+
+    @Override
+    public int cambioDisponibilidad(boolean estado, int id) {
+      return  repositorio.cambioDisponibilidad(estado,id);
+    }
+
+    @Override
+    public void eliminardetalleServicioPorId(int id) {
+        repositorio.deleteById(id);
+    }
+    @Override
+    public List<detalleServicios> detallesVinculadosAEstilista(int id) {
+        return repositorio.detallesVinculadosAEstilista(id);
+    }
+
+    @Override
+    public List<detalleServicios> detallesVinculadosAServicioPrestado(int id) {
+        return repositorio.detallesVinculadosAServicioPrestado(id);
+    }
+
+    @Override
+    public detalleServicios obtenerDetalleServicioPorId(int id) {
+        return repositorio.findById(id).get();
+    }
+
+
 }

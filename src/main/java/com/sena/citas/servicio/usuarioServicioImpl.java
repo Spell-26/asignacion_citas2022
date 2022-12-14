@@ -27,7 +27,17 @@ public class usuarioServicioImpl implements usuarioServicio{
         return repositorio.listarEstilistas(nivel);
     }
 
-    private void show(List<usuario> usuarios){
-        usuarios.forEach(System.out::println);
+    @Override
+    public void eliminarPorCargo(int id) {
+        repositorio.eliminarPorCargo(id);
+    }
+
+    @Override
+    public usuario obtenerUsuarioPorId(int id) {
+        return repositorio.findById(id).get();
+    }
+    @Override
+    public void eliminarUsuarioPorId(int id) {
+        repositorio.deleteById(id);
     }
 }

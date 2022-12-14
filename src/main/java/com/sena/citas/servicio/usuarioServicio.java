@@ -9,4 +9,10 @@ public interface usuarioServicio {
     public usuario guardarUsuario(usuario usuario);
 
     List<usuario> listarEstilistas(int nivel);
+
+    void eliminarPorCargo(int id);
+
+    usuario obtenerUsuarioPorId(int id);
+    //eliminar usuario por id
+    void eliminarUsuarioPorId(int id);
 }

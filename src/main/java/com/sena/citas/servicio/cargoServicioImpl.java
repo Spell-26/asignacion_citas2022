@@ -26,4 +26,10 @@ public class cargoServicioImpl implements cargoServicio{
     public cargo obtenerCargoPorId(int id) {
         return repositorio.findById(id).get();
     }
+
+    @Override
+    public void eliminarCargo(int id) {
+        repositorio.deleteById(id);
+    }
+
 }

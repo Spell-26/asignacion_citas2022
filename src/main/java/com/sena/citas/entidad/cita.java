@@ -1,6 +1,8 @@
 package com.sena.citas.entidad;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "citas")
@@ -14,7 +16,7 @@ public class cita {
     @JoinColumn(name = "cliente_id")
     private usuario cliente;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "detalle_servicio_id")
     private detalleServicios detalleS;
 

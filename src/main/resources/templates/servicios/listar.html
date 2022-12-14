@@ -30,8 +30,8 @@
       <td th:text="${servicio.nombreServicio}">Nombre</td>
       <td th:text="${servicio.descripcion}">Apellido</td>
       <td th:text="${servicio.duracion}">Email</td>
-      <td><a  class="btn btn-info">Editar</a></td>
-      <td><a class="btn btn-warning">Eliminar</a></td>
+      <td><a th:href="@{/servicios/editar/{id}(id = ${servicio.id})}" class="btn btn-info">Editar</a></td>
+      <td><a th:href="@{/servicios/listar/{id}(id = ${servicio.id})}" class="btn btn-warning">Eliminar</a></td>
     </tr>
     </tbody>
   </table>
