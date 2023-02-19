@@ -40,6 +40,10 @@ public class usuarioControlador {
     public String volverAlIndex(){
         return "index";
     }
+    @GetMapping("/gestion")
+    public String gestionHub(){
+        return "gestion";
+    }
     @GetMapping("/usuarios/nuevo")
     public String formularioRegistroUsuario(Model modelo){
         usuario usuario = new usuario();
