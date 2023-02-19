@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Estilo y belleza</title>
+    <!-- Estilos -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <!-- CDN fontsawesome -->
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/2f2f775292.js"></script>
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+          rel="stylesheet">
+</head>
+<body class="fondo-interno">
+<header>
+    <div class="container">
+        <div id="logo" class="logo-interno">
+            <a class="enlaces-header" th:href="@{/}">
+                <img alt="Imagen del logo del negocio" src="../img/logo.png">
+                <span>Estilo y belleza</span>
+            </a>
+        </div>
+    </div>
+</header>
+<div class="separador2"></div>
+<section>
+    <div class="container">
+        <div id="contenido">
+            <nav id="menu">
+                <ul>
+                    <li><a id="enlace1" onclick="citas()">Citas</a></li>
+                    <li><a id="enlace2" onclick="usuarios()">Usuarios</a></li>
+                    <li><a id="enlace3" onclick="estilistas()">Estilistas</a></li>
+                    <li><a id="enlace4" onclick="cargos()">Cargos</a></li>
+                    <li><a id="enlace5" onclick="servicios()">Servicios</a></li>
+                </ul>
+            </nav>
+            <div id="almacen">
+                <div id="citas" class="absolutos">
+                    <h1>Gestión de citas</h1>
+                    <p><i class="fa-solid fa-circle-dot"></i>En esta sección podrás ver información de las citas
+                        existentes tanto si han sido asignadas o si aún se encuentran disponibles. También se podrán
+                        asignar la citas de los clientes que deseen un servicio.</p>
+                    <a th:href="@{/citas/buscar}"><span>Asignar citas</span></a>
+                    <a th:href="@{/citas/listar}"><span>Ver citas asignadas</span></a>
+                </div>
+                <div id="usuarios" class="absolutos oculto">
+                    <h1>Gestión de usuarios</h1>
+                    <p><i class="fa-solid fa-circle-dot"></i>En esta sección podrás ver información de los usuarios
+                        dentro del sistema de <strong>Estilo y belleza glennis.</strong>También podrás crear nuevos
+                        usuarios.</p>
+                    <a th:href="@{/usuarios/nuevo}"><span>Nuevo usuario</span></a>
+                    <a th:href="@{/usuarios/listar}"><span>Ver usuarios en el sistema</span></a>
+                </div>
+                <div id="estilistas" class="absolutos oculto">
+                    <h1>Gestión de estilistas</h1>
+                    <p><i class="fa-solid fa-circle-dot"></i>En esta sección podrás ver información de los estilistas
+                        dentro del sistema de <strong>Estilo y belleza glennis.</strong>También podrás crear nuevos
+                        usuarios y ver los servicios que tienen asignados.</p>
+                    <a th:href="@{/usuarios/nuevo}"><span>Nuevo usuario</span></a>
+                    <a th:href="@{/usuarios/estilistas}"><span>Ver todos los estilistas</span></a>
+                    <a th:href="@{/servicios/asignados}"><span>Ver servicios</span></a>
+                    <a th:href="@{/servicios/asignar}"><span>Asignar nuevo servicio</span></a>
+                </div>
+                <div id="cargos" class="absolutos oculto">
+                    <h1>Gestión de cargos</h1>
+                    <p><i class="fa-solid fa-circle-dot"></i>En esta sección podrás ver información de los cargos
+                        existentes con la opción de modificarlos o añadir uno nuevo</p>
+                    <a th:href="@{/roles/nuevo}"><span>Nuevo cargo</span></a>
+                    <a th:href="@{/roles/listar}"><span>Ver todos los cargos</span></a>
+                </div>
+                <div id="servicios" class="absolutos oculto">
+                    <h1>Gestión de servicios</h1>
+                    <p><i class="fa-solid fa-circle-dot"></i>En esta sección podrás ver información de los servicios
+                        existentes con la opción de modificarlos o añadir uno nuevo</p>
+                    <a th:href="@{/servicios/nuevo}"><span>Nuevo servicio</span></a>
+                    <a th:href="@{/servicios/listar}"><span>Ver todos los servicios</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container" id="footer">
+        <ul class="nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="#">Cursos</a></li>
+            <li><a href="#">Politica de privacidad</a></li>
+            <li><a href="#">Contactanos</a></li>
+        </ul>
+        <!-- Bloque copyright -->
+        <div class="copyright">
+            <small>&copyEstilo y belleza glennis 2023, todos los derechos reservados.</small>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+<script>
+    function citas(){
+        document.getElementById("citas").style.display = 'block';
+        document.getElementById("usuarios").style.display = 'none';
+        document.getElementById("estilistas").style.display = 'none';
+        document.getElementById("cargos").style.display = 'none';
+        document.getElementById("servicios").style.display = 'none';
+    }
+    function usuarios(){
+        document.getElementById("citas").style.display = 'none';
+        document.getElementById("usuarios").style.display = 'block';
+        document.getElementById("estilistas").style.display = 'none';
+        document.getElementById("cargos").style.display = 'none';
+        document.getElementById("servicios").style.display = 'none';
+    }
+    function estilistas(){
+        document.getElementById("citas").style.display = 'none';
+        document.getElementById("usuarios").style.display = 'none';
+        document.getElementById("estilistas").style.display = 'block';
+        document.getElementById("cargos").style.display = 'none';
+        document.getElementById("servicios").style.display = 'none';
+    }
+    function cargos(){
+        document.getElementById("citas").style.display = 'none';
+        document.getElementById("usuarios").style.display = 'none';
+        document.getElementById("estilistas").style.display = 'none';
+        document.getElementById("cargos").style.display = 'block';
+        document.getElementById("servicios").style.display = 'none';
+    }
+    function servicios(){
+        document.getElementById("citas").style.display = 'none';
+        document.getElementById("usuarios").style.display = 'none';
+        document.getElementById("estilistas").style.display = 'none';
+        document.getElementById("cargos").style.display = 'none';
+        document.getElementById("servicios").style.display = 'block';
+    }
+</script>
